@@ -1,0 +1,209 @@
+package ru;
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Person {
+    String name;
+    int age;
+    String modelOfPhone;
+    static String telephoneNumber;
+    static int counte = 0;
+    static Person[] array;
+
+    // Function that changes the ModelOfPhone
+    public void setModelOfPhone(String modelOfPhone) {
+        this.modelOfPhone = modelOfPhone;
+    }
+
+    // Function that changes the TelephoneNumber
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+
+    public Person(String name, int age, String modelOfPhone, String telephoneNumber) {
+
+        this.name = name;
+        this.age = age;
+        this.modelOfPhone = modelOfPhone;
+        this.telephoneNumber = telephoneNumber;
+
+        counte++;
+
+    }
+
+    public Person() {
+
+    }
+
+    public void Scan() {
+
+        {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Создание данных о новом человеке");
+            System.out.println("Введите имя: ");
+            String name = sc.next();
+            this.name = name;
+            System.out.println("Введите возраст: ");
+            int age = sc.nextInt();
+            this.age = age;
+            System.out.println("Введите модель телефона: ");
+            String model = sc.next();
+            this.modelOfPhone = model;
+   //               while(correctUn() == false){
+
+           System.out.println("И последнее... ");
+//            String corTel = sc.nextLine();
+//            this.telephoneNumber = corTel;
+
+            new Person().correctUn();
+//            System.out.println("Введите номер телефона: ");
+//            int telephoneNumber = sc.nextInt();
+//            this.telephoneNumber = telephoneNumber;
+
+
+        }
+
+    }
+
+
+    public boolean correctUn() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите телефон: ");
+        String corTel = sc.nextLine();
+        this.telephoneNumber = corTel;
+
+        Pattern pattern = Pattern.compile("^(\\+79)([0-9]{9})$");
+        Matcher matcher = pattern.matcher(corTel);
+
+        if (matcher.matches()) {
+            System.out.println("Телефон: " + corTel + " является корpектным");
+
+            return true;
+        } else {
+            System.out.println("Телефон: " + corTel + " является НЕкорpектным");
+            new Person().ChangeNumTel();
+            return false;
+
+        }
+    }
+
+
+    public void ChangeNumTel(){
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Хотите что-то изменить? \n1. НОМЕР ТЕЛЕФОНА\n2. МОДЕЛЬ ТЕЛЕФОНА\n3. ПРОДОЛЖИТЬ СОЗДАНИЕ ОБЪЕКТОВ");
+
+        int random = sc.nextInt();
+        switch (random) {
+            case 1:
+                System.out.println("Хотите изменить номер? Введите № Объекта: ");
+
+                int obj = sc.nextInt();
+                System.out.println(array[obj - 1].name);
+                System.out.println("Вы выбрали объект: " + obj + ". " + (array[obj - 1].name));
+                System.out.println();
+                System.out.println("Введите нужный телефон: ");
+                String telChange = sc.next();
+                System.out.println();
+                array[obj - 1].setTelephoneNumber(telChange);
+                array[obj - 1].Info();
+                break;
+            case 2:
+                System.out.println("Хотите изменить модель? Введите № Объекта: ");
+                int obj2 = sc.nextInt();
+                System.out.println(array[obj2 - 1].name);
+                System.out.println("Вы выбрали объект: " + obj2 + ". " + (array[obj2 - 1].name));
+                System.out.println();
+                System.out.println("Введите нужню модель: ");
+                String modelChange = sc.next();
+                System.out.println();
+                array[obj2 - 1].setModelOfPhone(modelChange);
+                array[obj2 - 1].Info();
+                break;
+            case 3:
+                new Person().startTheProg();// ПО НОВОЙ НУЖНО ТГГДА СОЗДАВАТЬ ОБЬЕКТЫ
+        }
+       System.out.println("Пожалуйста, повторно в нужной строке укажите телефон ");
+        new Person().correctUn();
+
+//
+    }
+
+
+    public String getInfo() {
+        return "Имя: " + name + "; Возраст: " + age + "; Модель телефона: " + modelOfPhone + "; Номер телефона: " + telephoneNumber;
+    }
+
+    public void Info() {
+        System.out.println(" Имя: " + name + "; Возраст: " + age + "; Модель телефона: " + modelOfPhone + "; Номер телефона: " + telephoneNumber);
+    }
+//
+//    public void telCorrect (){
+//        Scanner sc = new Scanner(System.in);
+//        String in = "Введите нужный телефон:";
+//        System.out.println(in);
+//
+//        if (in =  sc.next(); this.telephoneNumber.  &&!in.equals("")) {
+//            double h = Double.parseDouble(in);
+//         
+//
+
+//    public void Russ(){
+//        name = "Вася";
+//        age = 16;
+//        modelOfPhone = "Honor 9 Light";
+//        telephoneNumber = 891034548;
+//
+//    }
+
+    public boolean compareEx(Person p) {
+
+        if (this.age > p.age)
+            System.out.println(this.name + " старше, чем " + p.name + ", так как " + this.age + " > " + p.age);
+        else if (this.age == p.age) System.out.println(this.name + " b " + p.name + " одногодки");
+        else System.out.println(this.name + " младше, чем " + p.name + ", так как " + this.age + " < " + p.age);
+
+        if (this.modelOfPhone == p.modelOfPhone) System.out.println("Одинаковая модель телефонов: " + p.modelOfPhone);
+        else {
+            System.out.println("НЕОдинаковая модель телефонов: " + this.name + " ходит с " + this.modelOfPhone + ", а " + p.name + " с " + p.modelOfPhone);
+        }
+
+        System.out.println("Номер телефона: " + this.telephoneNumber + " (" + this.name + ") " + " Номер телефона: " + p.telephoneNumber + " (" + p.name + ") ");
+
+        if (this.name.equals(p.name)) {
+            System.out.println("Имена одинаковые, что там " + this.name + ", что там " + p.name);
+            return true;
+
+        } else {
+            System.out.println("Имена отличаются: \n" + this.name + "  |  " + p.name);
+            return false;
+
+        }
+
+    }
+
+    public void startTheProg() {
+// static Person[] array;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введи число объектов, которые необходимо создать: ");
+        int personObj = sc.nextInt();
+        array = new Person[personObj];
+        System.out.println("Всего объектов: " + array.length);
+        for (int i = 0; i < personObj; i++) {
+            System.out.println("Объект " + (i + 1) + "-й");
+            array[i] = new Person();
+            array[i].Scan();
+        }
+        System.out.println("Информация о пользователях: ");
+        for (int i = 0; i < personObj; i++) {
+     System.out.print((i + 1) + ".");
+            array[i].Info();
+
+
+        } //new Person().ChangeNumTel();
+
+    }
+}
