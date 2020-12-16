@@ -1,0 +1,42 @@
+package ru;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+
+        Person petya = new Person("Петя", 10, "Samsung Galaxy 15", "+79283745365");
+        System.out.println(petya.getInfo());
+        System.out.println(petya.modelOfPhone);
+        petya.setModelOfPhone(" IPHONE 10");
+        petya.setTelephoneNumber("+79451115821");
+        System.out.println(petya.getInfo());
+
+        Person vasya = new Person("Вася", 16, "Honor 9 Light", "+79871323404");
+        System.out.println(vasya.getInfo());
+
+
+        petya.compareEx(vasya);
+
+        vasya.setModelOfPhone(" IPHONE 10");
+        petya.compareEx(vasya);
+        //    petya.Scan();
+
+        new Person("Коля", 19, "Honor 9 Light", "+7942323232");
+        System.out.println("Создано объектов: " + Person.counte);
+        System.out.println("Создано объектов: " + (new Person()).getInfo());
+        System.out.println("_______________________________________________________________________________");
+
+
+        new Person().startTheProg();
+
+
+//        p.Russ();
+//        System.out.println(p.getInfo());
+//        p.setTelephoneNumber(322323);
+//        System.out.println(p.getInfo());
+
+
+
+    }
+}
